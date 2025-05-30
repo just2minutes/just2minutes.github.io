@@ -187,3 +187,118 @@ footer {
         display: flex;
     }
 }
+
+#youtube-videos {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    align-items: stretch;
+    margin: 2em 0;
+    flex-wrap: wrap;
+}
+
+.youtube-video {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 16px;
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: none;
+    text-align: center;
+    transition: box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.youtube-video:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+}
+.youtube-video iframe {
+    width: 100%;
+    min-width: 300px;
+    height: 30vw;
+    max-height: 400px;
+    max-width: 700px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+.youtube-video p {
+    font-size: 1.05em;
+    font-weight: 500;
+    color: #222;
+    margin: 0;
+    word-break: break-word;
+}
+
+.youtube-channel-link {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+.visit-channel-btn {
+    background: #ff0000;
+    color: #fff;
+    padding: 12px 32px;
+    border-radius: 6px;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: background 0.2s, box-shadow 0.2s;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.visit-channel-btn:hover {
+    background: #cc0000;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+}
+
+.subscribe-btn {
+    background: #ff3333;
+    color: #fff;
+    padding: 12px 32px;
+    border-radius: 6px;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: background 0.2s, box-shadow 0.2s;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: 16px;
+}
+.subscribe-btn:hover {
+    background: #b30000;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+}
+
+#youtube-playlists {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    margin: 32px 0;
+}
+.playlist-btn {
+    background: #1976d2;
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: 500;
+    text-decoration: none;
+    margin: 4px 0;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: inline-block;
+}
+.playlist-btn:hover {
+    background: #125ea2;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+}
