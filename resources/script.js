@@ -66,7 +66,7 @@ function renderVideos(videos) {
             <p>${video.title}</p>
             <iframe 
                 width="360" height="203"
-                src="https://www.youtube.com/embed/${video.videoId}rel=0&modestbranding=1&showinfo=0&autoplay=0"
+                src="https://www.youtube.com/embed/${video.videoId}modestbranding=1&showinfo=0&autoplay=0"
                 loading="lazy"
                 title="${video.title}" 
                 frameborder="0"
