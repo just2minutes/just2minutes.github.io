@@ -63,6 +63,7 @@ function renderVideos(videos) {
     if (!container) return;
     container.innerHTML = videos.map(video => `
         <div class="youtube-video">
+            <p>${video.title}</p>
             <iframe 
                 width="360" height="203"
                 src="https://www.youtube.com/embed/${video.videoId}"
@@ -71,7 +72,6 @@ function renderVideos(videos) {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen>
             </iframe>
-            <p>${video.title}</p>
         </div>
     `).join('');
 }
