@@ -112,6 +112,11 @@ footer {
 
 /* Responsive styles for phones */
 @media (max-width: 600px) {
+    iframe {
+        width: 100%;
+        height: 200px;
+    }
+
     #youtube-videos {
         display: block;
     }
