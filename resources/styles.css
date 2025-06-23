@@ -188,6 +188,37 @@ footer {
     }
 }
 
+@media (max-width: 700px) {
+    #youtube-videos {
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+    }
+    .youtube-video {
+        max-width: 100%;
+        min-width: 0;
+        padding: 8px;
+    }
+    .youtube-video iframe {
+        width: 100vw;
+        max-width: 100%;
+        height: 56vw; /* 16:9 aspect ratio */
+        min-width: 0;
+    }
+    .youtube-channel-link {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .visit-channel-btn,
+    .subscribe-btn,
+    .notify-btn {
+        width: 90vw;
+        max-width: 340px;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}
+
 #youtube-videos {
     display: flex;
     gap: 32px;
