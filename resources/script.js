@@ -41,17 +41,26 @@ window.addEventListener('scroll', function() {
  * @returns {Promise<Array>} - Resolves to an array of video objects.
  */
 async function getLastTwoVideos(apiKey, channelId) {
-    const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=2&type=video`;
+    // First, get the last two video IDs
+    const searchUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=2&type=video`;
     try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) throw new Error('Network response was not ok');
-        const data = await response.json();
-        return data.items.map(item => ({
-            videoId: item.id.videoId,
+        const searchResponse = await fetch(searchUrl);
+        if (!searchResponse.ok) throw new Error('Network response was not ok');
+        const searchData = await searchResponse.json();
+        const videoIds = searchData.items.map(item => item.id.videoId).join(',');
+
+        // Now, get the full details (including full description) for those videos
+        const videosUrl = `https://www.googleapis.com/youtube/v3/videos?key=${apiKey}&id=${videoIds}&part=snippet`;
+        const videosResponse = await fetch(videosUrl);
+        if (!videosResponse.ok) throw new Error('Network response was not ok');
+        const videosData = await videosResponse.json();
+
+        return videosData.items.map(item => ({
+            videoId: item.id,
             title: item.snippet.title,
             thumbnail: item.snippet.thumbnails.medium.url,
             publishedAt: item.snippet.publishedAt,
-            description: item.snippet.description // Add this line
+            description: item.snippet.description // This is the full description!
         }));
     } catch (error) {
         console.error('Error fetching videos:', error);
