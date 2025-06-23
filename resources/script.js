@@ -129,7 +129,8 @@ function renderPlaylists(playlists) {
 }
 
 // Replace with your channel ID
-const apiKey = "AIzaSyBhsDPNQR69v70ZQFxkOvXMOIRgE4pQsls";
+const apiKey1 = "AIzaSyBhsDPNQR69v70ZQFxkOvXMOIRgE4pQsls";
+const apiKey = "AIzaSyDmr4hPqY2vYlWb7WbmC0u5lUE8vqF12Lg";
 const channelId = "UCesehqhgaJRI_NLsDCn3TRQ";
 
 document.addEventListener('DOMContentLoaded', function() {
