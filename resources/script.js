@@ -50,7 +50,8 @@ async function getLastTwoVideos(apiKey, channelId) {
             videoId: item.id.videoId,
             title: item.snippet.title,
             thumbnail: item.snippet.thumbnails.medium.url,
-            publishedAt: item.snippet.publishedAt
+            publishedAt: item.snippet.publishedAt,
+            description: item.snippet.description // Add this line
         }));
     } catch (error) {
         console.error('Error fetching videos:', error);
@@ -61,7 +62,7 @@ async function getLastTwoVideos(apiKey, channelId) {
 function renderVideos(videos) {
     const container = document.getElementById('youtube-videos');
     if (!container) return;
-    container.innerHTML = videos.map(video => `
+    container.innerHTML = videos.map((video, idx) => `
         <div class="youtube-video">
             <p>${video.title}</p>
             <iframe 
@@ -72,8 +73,26 @@ function renderVideos(videos) {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen>
             </iframe>
+            <button class="desc-toggle" data-target="desc-${idx}">Show Description</button>
+            <div class="video-desc" id="desc-${idx}" style="display:none;">
+                <p>${video.description.replace(/\n/g, "<br>")}</p>
+            </div>
         </div>
     `).join('');
+
+    // Add toggle functionality
+    container.querySelectorAll('.desc-toggle').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const desc = container.querySelector(`#${btn.dataset.target}`);
+            if (desc.style.display === "none") {
+                desc.style.display = "block";
+                btn.textContent = "Hide Description";
+            } else {
+                desc.style.display = "none";
+                btn.textContent = "Show Description";
+            }
+        });
+    });
 }
 
 /**
