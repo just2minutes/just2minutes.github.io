@@ -97,7 +97,7 @@ footer {
     padding: 10px 0;
     background-color: #4CAF50;
     background-color: gold;
-    color: white;
+    color: black;
     position: fixed;
     width: 100%;
     bottom: 0;
@@ -122,7 +122,7 @@ footer {
 
     #youtube-videos {
         display: block;
-        background-color: gold;
+        background-color: rgb(255, 255, 255);
     }
 
     header {
@@ -211,6 +211,10 @@ footer {
     .menu.open {
         display: flex;
     }
+
+    .youtube-video {
+        background: gold;
+    }
 }
 
 @media (min-width: 601px) {
@@ -222,7 +226,7 @@ footer {
 
 
     #youtube-videos {
-        background-color: gold;
+        background-color: rgb(255, 255, 255);
         display: flex;
         gap: 32px;
         justify-content: center;
@@ -232,7 +236,7 @@ footer {
     }
 
     .youtube-video {
-        background: #fff;
+        background: gold;
         border-radius: 12px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         padding: 16px;
