@@ -9,7 +9,7 @@ header {
     align-items: center;
     /* This keeps everything level */
     height: 120px;
-    background: gold;
+    background: #f8df80;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     padding: 0 20px;
     margin: 0;
@@ -96,7 +96,7 @@ footer {
     text-align: center;
     padding: 10px 0;
     background-color: #4CAF50;
-    background-color: gold;
+    background-color: #f8df80;
     color: black;
     position: fixed;
     width: 100%;
@@ -213,7 +213,7 @@ footer {
     }
 
     .youtube-video {
-        background: gold;
+        background: #f8df80;
     }
 }
 
@@ -236,7 +236,7 @@ footer {
     }
 
     .youtube-video {
-        background: gold;
+        background: #f8df80;
         border-radius: 12px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         padding: 16px;
