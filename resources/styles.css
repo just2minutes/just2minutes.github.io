@@ -9,7 +9,7 @@ header {
     align-items: center;
     /* This keeps everything level */
     height: 120px;
-    background: #fff;
+    background: gold;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     padding: 0 20px;
     margin: 0;
@@ -31,6 +31,7 @@ header.hide-on-scroll {
 }
 
 header img {
+    background-color: white;
     max-height: 100px;
     width: auto;
     display: block;
@@ -119,6 +120,7 @@ footer {
 
     #youtube-videos {
         display: block;
+        background-color: gold;
     }
 
     header {
@@ -218,6 +220,7 @@ footer {
 
 
     #youtube-videos {
+        background-color: gold;
         display: flex;
         gap: 32px;
         justify-content: center;
