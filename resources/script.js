@@ -73,7 +73,7 @@ function renderVideos(videos) {
     if (!container) return;
     container.innerHTML = videos.map((video, idx) => `
         <div class="youtube-video">
-            <p>${video.title}</p>
+            <h3>${video.title}</h3>
             <iframe 
                 width="360" height="203"
                 src="https://www.youtube.com/embed/${video.videoId}?rel=0"
