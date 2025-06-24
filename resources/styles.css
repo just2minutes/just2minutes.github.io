@@ -31,6 +31,7 @@ header.hide-on-scroll {
 }
 
 header img {
+    border-radius: 100%;
     background-color: white;
     max-height: 100px;
     width: auto;
@@ -95,6 +96,7 @@ footer {
     text-align: center;
     padding: 10px 0;
     background-color: #4CAF50;
+    background-color: gold;
     color: white;
     position: fixed;
     width: 100%;
