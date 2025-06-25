@@ -84,7 +84,7 @@ function renderVideos(videos) {
             </iframe>
             <button class="desc-toggle" data-target="desc-${idx}">Show Description</button>
             <div class="video-desc" id="desc-${idx}" style="display:none;">
-                <p>${video.description.replace(/\n/g, "<br>")}</p>
+                <p>${linkify(video.description).replace(/\n/g, "<br>")}</p>
             </div>
         </div>
     `).join('');
@@ -154,3 +154,15 @@ document.addEventListener('DOMContentLoaded', function() {
         getAllPlaylists(apiKey, channelId).then(renderPlaylists);
     }
 });
+
+function linkify(text) {
+    // Regex to match URLs (http, https, www)
+    return text.replace(
+        /(\bhttps?:\/\/[^\s<]+[^\s<\.)])|(\bwww\.[^\s<]+[^\s<\.)])/gi,
+        function(url) {
+            let href = url;
+            if (!href.match(/^https?:\/\//)) href = 'http://' + href;
+            return `<a href="${href}" target="_blank" rel="noopener">${url}</a>`;
+        }
+    );
+}
