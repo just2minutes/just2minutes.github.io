@@ -222,7 +222,7 @@ footer {
         display: none;
         /* Hide menu toggle on larger screens */
     }
-
+}
 
 
     #youtube-videos {
@@ -271,7 +271,7 @@ footer {
         margin: 0;
         word-break: break-word;
     }
-}
+
 
 .youtube-channel-link {
     display: flex;
