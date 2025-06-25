@@ -1,3 +1,4 @@
+/* General styles */
 html {
     background-color: #f0f0f0;
     font-family: Arial, sans-serif;
@@ -7,14 +8,12 @@ header {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    /* This keeps everything level */
     height: 120px;
     background: #f8df80;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     padding: 0 20px;
     margin: 0;
     gap: 10px;
-    /* Add space between logo and menu */
     transition: transform 0.3s ease;
     border-radius: 4px;
     position: fixed;
@@ -22,7 +21,6 @@ header {
     left: 10px;
     right: 10px;
     z-index: 100;
-    /* Choose a value higher than other elements */
 }
 
 header.hide-on-scroll {
@@ -43,7 +41,6 @@ header img {
 header nav {
     flex: 1;
     position: static;
-    /* Ensure nav is not absolutely positioned on desktop */
 }
 
 .menu {
@@ -53,7 +50,6 @@ header nav {
     margin: 0;
     padding: 0;
     justify-content: flex-end;
-    /* Align menu items to the right */
 }
 
 .menu li {
@@ -88,14 +84,11 @@ main {
     background-color: white;
     border-radius: 5px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    height: 2000px;
-    /* For demonstration purposes */
 }
 
 footer {
     text-align: center;
     padding: 10px 0;
-    background-color: #4CAF50;
     background-color: #f8df80;
     color: black;
     position: fixed;
@@ -132,14 +125,12 @@ footer {
         height: auto;
         gap: 10px;
         padding: 10px;
-        position: relative;
         position: fixed;
         height: 80px;
         top: 0;
         left: 0;
         right: 0;
         z-index: 100;
-        /* Choose a value higher than other elements */
     }
 
     header img {
@@ -149,20 +140,17 @@ footer {
 
     main {
         margin-top: 100px;
-        /* Space for the fixed heade */
     }
 
     .menu-toggle {
         display: block;
         margin-left: 0;
         order: 3;
-        /* Move icon to the far right */
         z-index: 101;
     }
 
     header nav {
         order: 2;
-        /* Menu after logo, before icon (but hidden unless open) */
         width: auto;
         position: static;
     }
@@ -182,7 +170,6 @@ footer {
         padding: 10px 10px;
         margin: 1%;
         text-align: center;
-        /* Center text in the menu */
         border-radius: 4px;
     }
 
@@ -200,7 +187,6 @@ footer {
         transition: background 0.2s, color 0.2s;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
         text-align: center;
-        /* Center text in the menu */
     }
 
     .menu a:hover {
@@ -220,59 +206,58 @@ footer {
 @media (min-width: 851px) {
     .menu-toggle {
         display: none;
-        /* Hide menu toggle on larger screens */
     }
 }
 
+/* YouTube videos grid */
+#youtube-videos {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    align-items: stretch;
+    margin: 2em 0;
+    flex-wrap: wrap;
+}
 
-    #youtube-videos {
-        background-color: rgb(255, 255, 255);
-        display: flex;
-        gap: 32px;
-        justify-content: center;
-        align-items: stretch;
-        margin: 2em 0;
-        flex-wrap: wrap;
-    }
+.youtube-video {
+    background: #f8df80;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 16px;
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: none;
+    text-align: center;
+    transition: box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-    .youtube-video {
-        background: #f8df80;
-        border-radius: 12px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        padding: 16px;
-        flex: 1 1 0;
-        min-width: 0;
-        max-width: none;
-        text-align: center;
-        transition: box-shadow 0.2s;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+.youtube-video:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
+}
 
-    .youtube-video:hover {
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
-    }
+.youtube-video iframe {
+    width: 100%;
+    min-width: 300px;
+    height: 30vw;
+    max-height: 400px;
+    max-width: 700px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
 
-    .youtube-video iframe {
-        width: 100%;
-        min-width: 300px;
-        height: 30vw;
-        max-height: 400px;
-        max-width: 700px;
-        border-radius: 8px;
-        margin-bottom: 12px;
-    }
+.youtube-video h3 {
+    font-size: 1.05em;
+    font-weight: 500;
+    color: #222;
+    margin: 0;
+    word-break: break-word;
+}
 
-    .youtube-video h3 {
-        font-size: 1.05em;
-        font-weight: 500;
-        color: #222;
-        margin: 0;
-        word-break: break-word;
-    }
-
-
+/* Channel buttons */
 .youtube-channel-link {
     display: flex;
     justify-content: center;
@@ -320,6 +305,7 @@ footer {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
 }
 
+/* Playlist buttons */
 #youtube-playlists {
     display: flex;
     flex-wrap: wrap;
@@ -350,6 +336,7 @@ footer {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
 }
 
+/* Description dropdown */
 .desc-toggle {
     margin: 8px 0;
     padding: 6px 18px;
