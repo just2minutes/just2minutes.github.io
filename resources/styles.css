@@ -203,7 +203,7 @@ footer {
     }
 
     .youtube-video {
-        width: 100%;
+        width: 90%;
         max-width: 500px;
         min-width: 0;
         margin: 0 auto;
@@ -247,9 +247,7 @@ footer {
     display: flex;
     gap: 32px;
     justify-content: center;
-    align-items: stretch;
     margin: 2em 0;
-    flex-wrap: wrap;
 }
 
 .youtube-video {
