@@ -74,14 +74,16 @@ function renderVideos(videos) {
     container.innerHTML = videos.map((video, idx) => `
         <div class="youtube-video">
             <h3>${video.title}</h3>
-            <iframe 
-                width="360" height="203"
-                src="https://www.youtube.com/embed/${video.videoId}?rel=0"
-                title="${video.title}" 
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-            </iframe>
+            <div class="youtube-video-iframe-wrap">
+                <iframe 
+                    width="360" height="203"
+                    src="https://www.youtube.com/embed/${video.videoId}?rel=0"
+                    title="${video.title}" 
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
             <button class="desc-toggle" data-target="desc-${idx}">Show Description</button>
             <div class="video-desc" id="desc-${idx}" style="display:none;">
                 <p>${linkify(video.description).replace(/\n/g, "<br>")}</p>
