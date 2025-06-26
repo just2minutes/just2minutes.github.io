@@ -1,11 +1,11 @@
 @media (min-width: 851px) {
     #youtube-videos {
-        margin-top: 32px;
-        padding-top: 100px;
+        /* margin-top: 32px; */
+        /* padding-top: 100px; */
     }
     main {
-    margin-top: 120px;
-    padding-top: 130px; /* For desktop header height + a little extra */
+        margin-top: 120px;
+        padding-top: 130px; /* For desktop header height + a little extra */
     }
 }
 /* General styles */
