@@ -79,11 +79,14 @@ header nav {
 
 main {
     margin: 20px;
-    padding-top: 120px;
+    padding-top: 60px;
+    margin-top: 60px;
     padding: 20px;
     background-color: white;
     border-radius: 5px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 footer {
@@ -143,7 +146,7 @@ footer {
     }
 
     main {
-        margin-top: 100px;
+        padding-top: 100px;
     }
 
     .menu-toggle {
