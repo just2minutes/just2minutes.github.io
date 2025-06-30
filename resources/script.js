@@ -144,7 +144,22 @@ async function getPlaylistVideos(apiKey, playlistId) {
         })));
         nextPageToken = data.nextPageToken || '';
     } while (nextPageToken);
-    return videos;
+
+    // Fetch full descriptions in batches of 50
+    let fullVideos = [];
+    for (let i = 0; i < videos.length; i += 50) {
+        const ids = videos.slice(i, i + 50).map(v => v.videoId).join(',');
+        const detailsUrl = `https://www.googleapis.com/youtube/v3/videos?key=${apiKey}&id=${ids}&part=snippet`;
+        const detailsResponse = await fetch(detailsUrl);
+        if (!detailsResponse.ok) continue;
+        const detailsData = await detailsResponse.json();
+        fullVideos = fullVideos.concat(detailsData.items.map(item => ({
+            videoId: item.id,
+            title: item.snippet.title,
+            description: item.snippet.description
+        })));
+    }
+    return fullVideos;
 }
 
 // Render playlist buttons and handle click to show videos
