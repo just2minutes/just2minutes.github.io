@@ -176,14 +176,15 @@ function renderPlaylists(playlists) {
     container.querySelectorAll('.playlist-btn').forEach(btn => {
         btn.addEventListener('click', async function() {
             const playlistId = btn.getAttribute('data-playlist-id');
+            const playlistTitle = btn.textContent.trim();
             const videos = await getPlaylistVideos(apiKey, playlistId);
-            renderPlaylistVideos(videos);
+            renderPlaylistVideos(videos, playlistTitle);
         });
     });
 }
 
 // Render the videos as iframes
-function renderPlaylistVideos(videos) {
+function renderPlaylistVideos(videos, playlistTitle = "") {
     const videoContainer = document.getElementById('playlist-videos');
     if (!videoContainer) return;
     videoContainer.innerHTML = videos.map((video, idx) => `
@@ -198,7 +199,9 @@ function renderPlaylistVideos(videos) {
                     allowfullscreen>
                 </iframe>
             </div>
-            <button class="desc-toggle" data-target="playlist-desc-${idx}">Show Description</button>
+            <button class="desc-toggle" data-target="playlist-desc-${idx}">
+                Show ${playlistTitle || "Description"}
+            </button>
             <div class="video-desc" id="playlist-desc-${idx}" style="display:none;">
                 <p>${linkify(video.description ? video.description : "").replace(/\n/g, "<br>")}</p>
             </div>
@@ -206,15 +209,15 @@ function renderPlaylistVideos(videos) {
     `).join('');
 
     // Add toggle functionality
-    videoContainer.querySelectorAll('.desc-toggle').forEach(btn => {
+    videoContainer.querySelectorAll('.desc-toggle').forEach((btn, idx) => {
         btn.addEventListener('click', function() {
             const desc = videoContainer.querySelector(`#${btn.dataset.target}`);
             if (desc.style.display === "none") {
                 desc.style.display = "block";
-                btn.textContent = "Hide Description";
+                btn.textContent = `Hide ${playlistTitle || "Description"}`;
             } else {
                 desc.style.display = "none";
-                btn.textContent = "Show Description";
+                btn.textContent = `Show ${playlistTitle || "Description"}`;
             }
         });
     });
