@@ -200,7 +200,7 @@ function renderPlaylistVideos(videos, playlistTitle = "") {
                 </iframe>
             </div>
             <button class="desc-toggle" data-target="playlist-desc-${idx}">
-                Show ${playlistTitle || "Description"}
+                Show ${playlistTitle}
             </button>
             <div class="video-desc" id="playlist-desc-${idx}" style="display:none;">
                 <p>${linkify(video.description ? video.description : "").replace(/\n/g, "<br>")}</p>
@@ -214,10 +214,10 @@ function renderPlaylistVideos(videos, playlistTitle = "") {
             const desc = videoContainer.querySelector(`#${btn.dataset.target}`);
             if (desc.style.display === "none") {
                 desc.style.display = "block";
-                btn.textContent = `Hide ${playlistTitle || "Description"}`;
+                btn.textContent = `Hide ${playlistTitle}`;
             } else {
                 desc.style.display = "none";
-                btn.textContent = `Show ${playlistTitle || "Description"}`;
+                btn.textContent = `Show ${playlistTitle}`;
             }
         });
     });
