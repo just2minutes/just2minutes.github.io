@@ -129,13 +129,61 @@ async function getAllPlaylists(apiKey, channelId) {
     return playlists;
 }
 
+// Helper: Fetch videos from a playlist
+async function getPlaylistVideos(apiKey, playlistId) {
+    let videos = [];
+    let nextPageToken = '';
+    do {
+        const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?key=${apiKey}&playlistId=${playlistId}&part=snippet&maxResults=50&pageToken=${nextPageToken}`;
+        const response = await fetch(apiUrl);
+        if (!response.ok) break;
+        const data = await response.json();
+        videos = videos.concat(data.items.map(item => ({
+            videoId: item.snippet.resourceId.videoId,
+            title: item.snippet.title
+        })));
+        nextPageToken = data.nextPageToken || '';
+    } while (nextPageToken);
+    return videos;
+}
+
+// Render playlist buttons and handle click to show videos
 function renderPlaylists(playlists) {
     const container = document.getElementById('youtube-playlists');
     if (!container) return;
     container.innerHTML = playlists.map(pl => `
-        <a class="playlist-btn" href="https://www.youtube.com/playlist?list=${pl.id}" target="_blank">
+        <button class="playlist-btn" data-playlist-id="${pl.id}">
             ${pl.title}
-        </a>
+        </button>
+    `).join('') + `<div id="playlist-videos"></div>`;
+
+    // Add click event to each button
+    container.querySelectorAll('.playlist-btn').forEach(btn => {
+        btn.addEventListener('click', async function() {
+            const playlistId = btn.getAttribute('data-playlist-id');
+            const videos = await getPlaylistVideos(apiKey, playlistId);
+            renderPlaylistVideos(videos);
+        });
+    });
+}
+
+// Render the videos as iframes
+function renderPlaylistVideos(videos) {
+    const videoContainer = document.getElementById('playlist-videos');
+    if (!videoContainer) return;
+    videoContainer.innerHTML = videos.map(video => `
+        <div class="playlist-video">
+            <h4>${video.title}</h4>
+            <div class="youtube-video-iframe-wrap">
+                <iframe
+                    src="https://www.youtube.com/embed/${video.videoId}?rel=0"
+                    title="${video.title}"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
     `).join('');
 }
 

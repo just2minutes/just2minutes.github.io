@@ -1,8 +1,4 @@
 @media (min-width: 851px) {
-    #youtube-videos {
-        /* margin-top: 32px; */
-        /* padding-top: 100px; */
-    }
     main {
         margin-top: 120px;
         padding-top: 130px; /* For desktop header height + a little extra */
@@ -416,4 +412,40 @@ footer {
     text-align: left;
     font-size: 0.98em;
     color: #222;
+}
+
+#playlist-videos {
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: center;
+}
+
+.playlist-video {
+    background: #f8df80;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 16px;
+    max-width: 380px;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.playlist-video h4 {
+    font-size: 1em;
+    margin-bottom: 12px;
+}
+
+.youtube-video-iframe-wrap {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    max-width: 340px;
+    margin: 0 auto;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
