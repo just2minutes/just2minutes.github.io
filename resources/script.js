@@ -168,7 +168,7 @@ function renderPlaylists(playlists) {
     if (!container) return;
     container.innerHTML = playlists.map(pl => `
         <button class="playlist-btn" data-playlist-id="${pl.id}" data-title="${pl.title}">
-            Show playlist ${pl.title}
+            Show ${pl.title}
         </button>
     `).join('') + `<div id="playlist-videos"></div>`;
 
@@ -188,7 +188,7 @@ function renderPlaylists(playlists) {
             if (!isShowing) {
                 const videos = await getPlaylistVideos(apiKey, playlistId);
                 renderPlaylistVideos(videos, playlistTitle);
-                btn.textContent = `Hide playlist ${playlistTitle}`;
+                btn.textContent = `Hide ${playlistTitle}`;
                 btn.classList.add('open');
             }
         });
