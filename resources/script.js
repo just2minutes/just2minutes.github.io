@@ -171,7 +171,7 @@ function renderPlaylists(playlists) {
 function renderPlaylistVideos(videos) {
     const videoContainer = document.getElementById('playlist-videos');
     if (!videoContainer) return;
-    videoContainer.innerHTML = videos.map(video => `
+    videoContainer.innerHTML = videos.map((video, idx) => `
         <div class="playlist-video">
             <h4>${video.title}</h4>
             <div class="youtube-video-iframe-wrap">
@@ -183,8 +183,26 @@ function renderPlaylistVideos(videos) {
                     allowfullscreen>
                 </iframe>
             </div>
+            <button class="desc-toggle" data-target="playlist-desc-${idx}">Show Description</button>
+            <div class="video-desc" id="playlist-desc-${idx}" style="display:none;">
+                <p>${linkify(video.description ? video.description : "").replace(/\n/g, "<br>")}</p>
+            </div>
         </div>
     `).join('');
+
+    // Add toggle functionality
+    videoContainer.querySelectorAll('.desc-toggle').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const desc = videoContainer.querySelector(`#${btn.dataset.target}`);
+            if (desc.style.display === "none") {
+                desc.style.display = "block";
+                btn.textContent = "Hide Description";
+            } else {
+                desc.style.display = "none";
+                btn.textContent = "Show Description";
+            }
+        });
+    });
 }
 
 // Replace with your channel ID
