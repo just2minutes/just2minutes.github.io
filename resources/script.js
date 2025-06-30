@@ -167,18 +167,30 @@ function renderPlaylists(playlists) {
     const container = document.getElementById('youtube-playlists');
     if (!container) return;
     container.innerHTML = playlists.map(pl => `
-        <button class="playlist-btn" data-playlist-id="${pl.id}">
-            ${pl.title}
+        <button class="playlist-btn" data-playlist-id="${pl.id}" data-title="${pl.title}">
+            Show playlist ${pl.title}
         </button>
     `).join('') + `<div id="playlist-videos"></div>`;
 
-    // Add click event to each button
     container.querySelectorAll('.playlist-btn').forEach(btn => {
         btn.addEventListener('click', async function() {
             const playlistId = btn.getAttribute('data-playlist-id');
-            const playlistTitle = btn.textContent.trim();
-            const videos = await getPlaylistVideos(apiKey, playlistId);
-            renderPlaylistVideos(videos, playlistTitle);
+            const playlistTitle = btn.getAttribute('data-title');
+            const isShowing = btn.classList.contains('open');
+
+            // Hide all playlists and reset all buttons
+            container.querySelectorAll('.playlist-btn').forEach(b => {
+                b.textContent = `Show playlist ${b.getAttribute('data-title')}`;
+                b.classList.remove('open');
+            });
+            document.getElementById('playlist-videos').innerHTML = '';
+
+            if (!isShowing) {
+                const videos = await getPlaylistVideos(apiKey, playlistId);
+                renderPlaylistVideos(videos, playlistTitle);
+                btn.textContent = `Hide playlist ${playlistTitle}`;
+                btn.classList.add('open');
+            }
         });
     });
 }
@@ -200,7 +212,7 @@ function renderPlaylistVideos(videos, playlistTitle = "") {
                 </iframe>
             </div>
             <button class="desc-toggle" data-target="playlist-desc-${idx}">
-                Show ${playlistTitle}
+                Show Description
             </button>
             <div class="video-desc" id="playlist-desc-${idx}" style="display:none;">
                 <p>${linkify(video.description ? video.description : "").replace(/\n/g, "<br>")}</p>
@@ -214,10 +226,10 @@ function renderPlaylistVideos(videos, playlistTitle = "") {
             const desc = videoContainer.querySelector(`#${btn.dataset.target}`);
             if (desc.style.display === "none") {
                 desc.style.display = "block";
-                btn.textContent = `Hide ${playlistTitle}`;
+                btn.textContent = "Hide Description";
             } else {
                 desc.style.display = "none";
-                btn.textContent = `Show ${playlistTitle}`;
+                btn.textContent = "Show Description";
             }
         });
     });
