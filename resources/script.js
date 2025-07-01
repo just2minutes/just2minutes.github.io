@@ -179,7 +179,7 @@ function renderPlaylists(playlists) {
 
             // Hide all playlists and reset all buttons
             container.querySelectorAll('.playlist-btn').forEach(b => {
-                b.textContent = `Show playlist ${b.getAttribute('data-title')}`;
+                b.textContent = `Show ${b.getAttribute('data-title')}`;
                 b.classList.remove('open');
             });
             document.getElementById('playlist-videos').innerHTML = '';
