@@ -76,7 +76,6 @@ function renderVideos(videos) {
             <h3>${video.title}</h3>
             <div class="youtube-video-iframe-wrap">
                 <iframe 
-                    width="360" height="203"
                     src="https://www.youtube.com/embed/${video.videoId}?rel=0"
                     title="${video.title}" 
                     frameborder="0"

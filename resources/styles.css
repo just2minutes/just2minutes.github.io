@@ -219,9 +219,9 @@ footer {
 
     .youtube-video-iframe-wrap {
         width: 100%;
+        max-width: 560px;      /* Increase this value for larger videos */
         aspect-ratio: 16 / 9;
-        max-width: 700px;
-        margin-bottom: 12px;
+        margin: 0 auto 12px auto;
         border-radius: 8px;
         overflow: hidden;
         background: #000;
@@ -279,9 +279,9 @@ footer {
 
 .youtube-video-iframe-wrap {
     width: 100%;
+    max-width: 560px;      /* Increase this value for larger videos */
     aspect-ratio: 16 / 9;
-    max-width: 700px;
-    margin-bottom: 12px;
+    margin: 0 auto 12px auto;
     border-radius: 8px;
     overflow: hidden;
     background: #000;
@@ -439,9 +439,9 @@ footer {
 
 .youtube-video-iframe-wrap {
     width: 100%;
+    max-width: 560px;      /* Increase this value for larger videos */
     aspect-ratio: 16 / 9;
-    max-width: 340px;
-    margin: 0 auto;
+    margin: 0 auto 12px auto;
     border-radius: 8px;
     overflow: hidden;
     background: #000;
