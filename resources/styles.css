@@ -4,6 +4,25 @@
         padding-top: 0; /* For desktop header height + a little extra */
     }
 }
+
+iframe {
+            border: none; /* Remove default border */
+            width: 100%; /* Example: fill container width */
+            height: 300px; /* Example: fixed height, content will scroll */
+            overflow-y: scroll; /* Ensure vertical scrolling is enabled */
+            
+            /* Hide scrollbar for WebKit browsers (Chrome, Safari, Edge, Opera) */
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            /* Hide scrollbar for Firefox */
+            scrollbar-width: none; 
+            
+            /* Hide scrollbar for IE and older Edge */
+            -ms-overflow-style: none; 
+        }
+
 /* General styles */
 html {
     background-color: #f0f0f0;
