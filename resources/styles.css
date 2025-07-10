@@ -1,7 +1,7 @@
 @media (min-width: 851px) {
-    main {
-        margin-top: 120px;
-        padding-top: 130px; /* For desktop header height + a little extra */
+    iframe {
+        margin-top: 0;
+        padding-top: 0; /* For desktop header height + a little extra */
     }
 }
 /* General styles */
@@ -83,13 +83,13 @@ header nav {
     color: #fff;
 }
 
-main {
-    margin: 20px;
-    /* margin-top: 120px; */
+iframe {
+    /*margin: 20px;
+    margin-top: 120px;
     padding: 20px;
-    padding-top: 130px; /* For desktop header height + a little extra */
+    padding-top: 130px; /* For desktop header height + a little extra 
     background-color: white;
-    border-radius: 5px;
+    */border-radius: 5px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
