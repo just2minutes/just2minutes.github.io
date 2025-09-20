@@ -116,7 +116,8 @@ iframe {
 footer {
     text-align: center;
     padding: 10px 0;
-    background-color: #f8df80;
+    /*background-color: #f8df80;*/
+    background-color: #D4AF37;
     color: black;
     position: fixed;
     width: 100%;
