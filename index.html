@@ -80,7 +80,7 @@
             const videoId = video.link.split('v=')[1];
             document.getElementById('hero-title').textContent = video.title;
             document.getElementById('hero-date').textContent = new Date(video.pubDate).toLocaleDateString();
-            document.getElementById('hero-player').innerHTML = `<iframe class="w-full h-full" src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>`;
+            document.getElementById('hero-player').innerHTML = `<iframe class="w-full h-full" src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1" allowfullscreen></iframe>`;
             
             const desc = video.description || "No description available.";
             document.getElementById('hero-desc').innerHTML = desc.length > 200 
