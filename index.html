@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Just2minutes | Daily Mishnayos</title>
+    <style>
+        :root { 
+            --primary: #2563eb; 
+            --bg: #f8fafc; 
+            --text: #1e293b; 
+            --accent: #eff6ff;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
+
+        header { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); text-decoration: none; }
+        nav { display: flex; gap: 1.5rem; align-items: center; }
+        nav a { text-decoration: none; color: #475569; font-weight: 500; font-size: 0.9rem; transition: color 0.2s; }
+        nav a:hover { color: var(--primary); }
+        .btn-cta { background: var(--primary); color: white !important; padding: 0.5rem 1rem; border-radius: 6px; }
+
+        main { max-width: 1000px; margin: 0 auto; padding: 2rem 1rem; }
+        
+        #hero { margin-bottom: 3rem; text-align: center; }
+        .hero-iframe { width: 100%; aspect-ratio: 16/9; border-radius: 12px; border: none; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); background: #000; }
+        
+        .section-title { margin: 3rem 0 1.5rem; font-size: 1.5rem; color: #0f172a; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+        .card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.2s; border: 1px solid #e2e8f0; }
+        .card:hover { transform: translateY(-5px); border-color: var(--primary); }
+        .thumbnail { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+        .info { padding: 1rem; }
+        
+        .about-section { background: white; padding: 3rem; border-radius: 16px; margin-top: 3rem; border: 1px solid #e2e8f0; text-align: center; }
+        .footer { text-align: center; padding: 2rem; color: #64748b; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">Just2minutes</a>
+        <nav>
+            <a href="#about">About</a>
+            <a href="https://chat.whatsapp.com/JDERP6vZjZkIYN8SGXOj6W">WhatsApp</a>
+            <a href="mailto:just2minutesjust2mishnayos@gmail.com" class="btn-cta">Email Us</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div id="latest-container">
+                <div class="hero-iframe" style="display:flex;align-items:center;justify-content:center;color:white;">Loading latest class...</div>
+            </div>
+            <h2 id="hero-title" style="margin-top: 1.5rem;">Welcome to Just2minutes</h2>
+        </section>
+
+        <section id="videos">
+            <h2 class="section-title">Latest Classes</h2>
+            <div id="grid-container" class="grid">Loading library...</div>
+        </section>
+
+        <section id="about" class="about-section">
+            <h2 class="section-title" style="margin-top:0;">About Our Mission</h2>
+            <p style="max-width: 600px; margin: 0 auto;">Welcome to Just2minutes! We are dedicated to providing daily, bite-sized Mishnayos classes that fit perfectly into your busy schedule. Join our growing community of learners committed to consistent growth, one small step at a time.</p>
+        </section>
+    </main>
+
+    <footer class="footer">&copy; Just2minutes 2025 | Consistency is Key</footer>
+
+    <script>
+        const CHANNEL_ID = 'UCesehqhgaJRI_NLsDCn3TRQ';
+        
+        async function fetchVideos() {
+            const grid = document.getElementById('grid-container');
+            const hero = document.getElementById('latest-container');
+            const heroTitle = document.getElementById('hero-title');
+            const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
+
+            try {
+                const response = await fetch(rssUrl);
+                const data = await response.json();
+                
+                // Function to update the player
+                const playVideo = (id, title) => {
+                    hero.innerHTML = `<iframe class="hero-iframe" src="https://www.youtube.com/embed/${id}?autoplay=1" allowfullscreen></iframe>`;
+                    heroTitle.textContent = title;
+                    window.scrollTo({top: 0, behavior: 'smooth'});
+                };
+
+                // Set Initial Hero
+                const latest = data.items[0];
+                playVideo(latest.link.split('v=')[1], latest.title);
+
+                // Populate Grid
+                grid.innerHTML = data.items.slice(1).map(item => {
+                    const id = item.link.split('v=')[1];
+                    return `
+                        <div class="card" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); playVideo('${id}', '${item.title.replace(/'/g, "\\'")}')">
+                            <img src="https://img.youtube.com/vi/${id}/mqdefault.jpg" class="thumbnail">
+                            <div class="info">
+                                <h4 style="font-size: 0.9rem;">${item.title.substring(0, 45)}...</h4>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+            } catch (error) {
+                grid.innerHTML = "<p style='text-align:center;'>Unable to load videos. Check connection.</p>";
+            }
+        }
+
+        window.onload = fetchVideos;
+    </script>
+</body>
+</html>
