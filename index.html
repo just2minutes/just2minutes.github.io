@@ -9,46 +9,69 @@
         .card { transition: transform 0.2s; }
         .card:hover { transform: translateY(-4px); }
         .read-more-btn { color: #2563eb; font-weight: 600; cursor: pointer; }
+        .hidden-content { display: none; }
+        /* Smooth scroll for anchor links */
+        html { scroll-behavior: smooth; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans">
 
-    <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <nav class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
             <img src="./resources/logo.png" alt="Just2minutes Logo" class="h-10" onerror="this.style.display='none'">
-            <ul class="hidden md:flex gap-6 font-medium text-slate-600">
-                <li><a href="#" onclick="window.location.href='./'" class="hover:text-blue-600">Home</a></li>
+            
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex gap-6 font-medium text-slate-600 items-center">
+                <li><a href="#home" class="hover:text-blue-600">Home</a></li>
                 <li><a href="#" onclick="toggleLibrary()" class="hover:text-blue-600">Gallery</a></li>
                 <li><a href="#about" class="hover:text-blue-600">About</a></li>
                 <li><a href="https://chat.whatsapp.com/JDERP6vZjZkIYN8SGXOj6W" target="_blank" class="hover:text-green-600">WhatsApp</a></li>
                 <li><a href="mailto:just2minutesjust2mishnayos@gmail.com" class="hover:text-blue-600">Email</a></li>
             </ul>
+
+            <!-- Mobile Burger Menu Button -->
+            <button id="burger-btn" class="md:hidden p-2 text-slate-600" onclick="toggleMobileMenu()">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
         </nav>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-6 py-4 flex flex-col gap-4">
+            <a href="#home" onclick="toggleMobileMenu()">Home</a>
+            <a href="#" onclick="toggleLibrary(); toggleMobileMenu();">Gallery</a>
+            <a href="#about" onclick="toggleMobileMenu()">About</a>
+            <a href="https://chat.whatsapp.com/JDERP6vZjZkIYN8SGXOj6W" target="_blank">WhatsApp</a>
+            <a href="mailto:just2minutesjust2mishnayos@gmail.com">Email</a>
+        </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-6 py-10">
-        <!-- Hero Section -->
+    <main id="home" class="max-w-4xl mx-auto px-6 py-10">
+        <!-- Welcoming Header -->
+        <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-8 text-center">Welcome to Your Daily Mishnayos</h1>
+
         <div id="hero-section" class="bg-white rounded-2xl shadow-lg p-6 mb-12">
-            <h1 id="hero-title" class="text-2xl font-bold mb-2">Loading latest class...</h1>
-            <p id="hero-date" class="text-slate-500 mb-6 text-sm"></p>
-            
-            <div id="hero-player" class="w-full aspect-video bg-black rounded-xl overflow-hidden mb-6"></div>
-            
+            <h2 id="hero-title" class="text-2xl font-bold mb-2">Loading latest class...</h2>
+            <p id="hero-date" class="text-slate-500 mb-4 text-sm"></p>
+            <div id="hero-player" class="w-full aspect-video bg-black rounded-xl overflow-hidden mb-4"></div>
             <div id="hero-desc" class="text-slate-700 leading-relaxed"></div>
         </div>
 
-        <!-- Toggle Button -->
         <div class="text-center mb-8">
             <button onclick="toggleLibrary()" id="toggle-btn" class="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold shadow-md hover:bg-blue-700 transition">
                 Load Previous Classes
             </button>
         </div>
 
-        <!-- Library Grid -->
-        <section id="library" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></section>
+        <!-- Library Section -->
+        <section id="library" class="hidden flex flex-col gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="library-grid"></div>
+            <div class="text-center py-6">
+                <a href="https://www.youtube.com/channel/UCesehqhgaJRI_NLsDCn3TRQ" target="_blank" class="text-blue-600 font-semibold hover:underline">
+                    View more content on YouTube &rarr;
+                </a>
+            </div>
+        </section>
 
-        <!-- About Section -->
         <section id="about" class="mt-20 bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
             <h2 class="text-3xl font-bold mb-6">About Just2minutes</h2>
             <p class="text-slate-600 leading-relaxed">Join us for daily Mishnayos classes that fit right into your busy schedule. Consistency is key, and just two minutes a day can make a massive difference in your learning journey.</p>
@@ -80,7 +103,7 @@
             const videoId = video.link.split('v=')[1];
             document.getElementById('hero-title').textContent = video.title;
             document.getElementById('hero-date').textContent = new Date(video.pubDate).toLocaleDateString();
-            document.getElementById('hero-player').innerHTML = `<iframe class="w-full h-full" src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1" allowfullscreen></iframe>`;
+            document.getElementById('hero-player').innerHTML = `<iframe class="w-full h-full" src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>`;
             
             const desc = video.description || "No description available.";
             document.getElementById('hero-desc').innerHTML = desc.length > 200 
@@ -89,8 +112,8 @@
         }
 
         function renderLibrary() {
-            const lib = document.getElementById('library');
-            lib.innerHTML = allVideos.map(item => {
+            const grid = document.getElementById('library-grid');
+            grid.innerHTML = allVideos.map(item => {
                 const id = item.link.split('v=')[1];
                 return `
                     <div class="card bg-white rounded-xl shadow-sm border p-4 cursor-pointer" onclick="window.location.search='?video-id=${id}'; window.scrollTo({top:0, behavior:'smooth'})">
@@ -106,9 +129,11 @@
             const btn = document.getElementById('toggle-btn');
             lib.classList.toggle('hidden');
             btn.textContent = lib.classList.contains('hidden') ? 'Load Previous Classes' : 'Hide Library';
-            if(!lib.classList.contains('hidden')) {
-                lib.scrollIntoView({behavior: 'smooth'});
-            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
         }
 
         window.onload = fetchVideos;
